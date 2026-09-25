@@ -15,3 +15,143 @@ Then paste it below the line. Do not close the terminal before you have saved.
 There is no way to get the session back afterwards.
 
 --------------------------------------------------------------------------------
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+(base) Rushils-MacBook-Pro:DS_210 rushilranjan$ cd'/User
+(base) Rushils-MacBook-Pro:DS_210 rushilranjan$ cd '/Users/rushilranjan/Documents/School Files/D
+S_210/bashcrawl/entrance'
+(base) Rushils-MacBook-Pro:entrance rushilranjan$ cat scroll
+
+It is pitch black in these catacombs.
+You have a magickal spell that lists all items in a room.
+
+To see in the dark, type:     ls
+To move around, type:         cd <directory>
+
+Try looking around this room.
+Then move into one of the next rooms.
+
+EXAMPLE:
+
+$ ls
+$ cd cellar
+
+Remember to cast ``ls`` when you get into the next room!
+
+(base) Rushils-MacBook-Pro:entrance rushilranjan$ cd cellar/armouty
+bash: cd: cellar/armouty: No such file or directory
+(base) Rushils-MacBook-Pro:entrance rushilranjan$ cd cellar/armoury
+(base) Rushils-MacBook-Pro:armoury rushilranjan$ ./treasure
+You have found a gleaming silver **sword**!  You marvel at
+its craftsmanship, and you recall tales from your childhood
+of the great mystic king Rannismir who bore such a sword to
+protect the kingdom from the undead.
+
+Add this item to your inventory:
+
+export I=sword,$I
+
+Remember, you can check your inventory:
+
+echo $I
+
+(base) Rushils-MacBook-Pro:armoury rushilranjan$ export I=sword,$I
+(base) Rushils-MacBook-Pro:armoury rushilranjan$ ./potion
+You have found a potion bottle of swirling
+green liquid. Do you want to drink it?  y/n
+
+y
+The taste of a rustic green plant fills your mouth.  It
+warms and strengthens you.
+
+Create a variable for your health points (HP).  You have
+15HP:
+
+export HP=15
+
+You can check your health at any time:
+
+echo $HP
+
+(base) Rushils-MacBook-Pro:armoury rushilranjan$ cd ../..
+(base) Rushils-MacBook-Pro:entrance rushilranjan$ cd rift
+bash: cd: rift: No such file or directory
+(base) Rushils-MacBook-Pro:entrance rushilranjan$ cd chapel
+(base) Rushils-MacBook-Pro:chapel rushilranjan$ cd portal
+bash: cd: portal: No such file or directory
+(base) Rushils-MacBook-Pro:chapel rushilranjan$ cd ..
+(base) Rushils-MacBook-Pro:entrance rushilranjan$ cd portal
+(base) Rushils-MacBook-Pro:portal rushilranjan$ cd arena
+(base) Rushils-MacBook-Pro:arena rushilranjan$ cat scroll
+
+ .:|  T H E C H A M B E R O F  |:.
+.:||  N Y A R L A T H O T E P  ||:.
+-----------------------------------
+| /                             \ |
+| |                             | |
+|||                             |||
+|||                             |||
+|||                             |||
+|||                             |||
+|||                             |||
+|||                             |||
+||| __________________________  |||
+|||/''''                   ''''\|||
+-----------------------------------
+
+# You have entered an ancient arena,
+# probably used for worship.
+#
+# And "worship", in this dangerous realm,
+# usually means blood sport.
+#
+# There is a gaping pit in the center
+# of the arena.
+#
+# If you remember how to summon a potion,
+# this might be a good time to do it.
+
+(base) Rushils-MacBook-Pro:arena rushilranjan$ cd pit
+(base) Rushils-MacBook-Pro:pit rushilranjan$ cat scroll
+
+# You have entered the chamber of
+# Nyarlathotep, the crawling chaos.
+#
+# Nyarlathotep, older than the old
+# gods themselves, has been waiting for you.
+
+(base) Rushils-MacBook-Pro:pit rushilranjan$ ./nyarlathotep
+./nyarlathotep: line 19: /Users/rushilranjan/Documents/School: No such file or directory
+In the blink of an eye, Nyarlathotep is standing before you.
+From its hands emanate black necrotic rays, and your mind
+screams.
+
+Are you armed? y/n  y
+Enter a number.
+53
+The monster rolled  13
+You rolled  13
++2 POSIX wizard bonus!
+A hit! A palpable hit!  You have vanquished the elder god of
+chaos!
+
+(base) Rushils-MacBook-Pro:pit rushilranjan$ cat scroll
+
+# You have entered the chamber of
+# Nyarlathotep, the crawling chaos.
+#
+# Nyarlathotep, older than the old
+# gods themselves, has been waiting for you.
+
+(base) Rushils-MacBook-Pro:pit rushilranjan$ cat end
+You have reached the end of the game.  You know enough Bash
+now to use it for every day activities.  Practice makes
+perfect, so be sure to use it often.  For continued Bash
+tips, visit opensource.com often.
+
+And eventually, we hope to see you contribute your own
+dungeon rooms to Bashcrawl!
+
+(base) Rushils-MacBook-Pro:pit rushilranjan$ 

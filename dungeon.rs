@@ -21,4 +21,3 @@ pub const STRONGHOLD_TREASURE: &str = "goblet";
 
 /// The name of the thing waiting in the pit. One word.
 pub const FINAL_BOSS: &str = "nyarlathotep";
-
