@@ -66,10 +66,14 @@ pub fn linear(keeper: &mut SecretKeeper, min: u32, max: u32) -> u32 {
             return guess;
         }
 
+        if guess == u32::MAX {
+            break;
+        }
+
         guess += 1;
     }
 
-    max
+    min
 }
 
 /// Halve the range at each step: ask whether the number is above the midpoint,
@@ -100,48 +104,37 @@ pub const STRIDE: u32 = 1;
 /// Like `linear`, this should always find the number inside the loop, but the
 /// compiler can't know that, so you still have to say what happens if the loop ends
 pub fn jump(keeper: &mut SecretKeeper, min: u32, max: u32) -> u32 {
-    // YOUR SOLUTION GOES HERE.
-    todo!("jump")
+   let mut current = min;
+
+    while current < max {
+        if !keeper.ask_if_greater(current) {
+            let mut start = current.saturating_sub(STRIDE - 1);
+
+            if start < min {
+                start = min;
+            }
+
+            return linear(keeper, start, current + 1);
+        }
+
+        let next = current.saturating_add(STRIDE);
+
+        if next >= max {
+            return linear(keeper, current + 1, max);
+        }
+
+        current = next;
+    }
+
+    min 
+
+        
 }
 
 /// Halve the range like `binary`, but spend one extra question at each step
 /// asking outright whether the midpoint is the number. Finishes in a single
 /// question when it guesses right on the first try.
 pub fn lucky(keeper: &mut SecretKeeper, min: u32, max: u32) -> u32 {
-    let mut guess = min;
-
-    while guess < max {
-        if keeper.ask_if_equal(guess) {
-            return guess;
-        }
-
-        if keeper.ask_if_greater(guess) {
-            guess += STRIDE;
-        } else {
-            let mut back = guess;
-
-            while back >= STRIDE && back >= min {
-                if keeper.ask_if_equal(back) {
-                    return back;
-                }
-
-                back -= STRIDE;
-            }
-
-            return min;
-        }
-    }
-
-    max
-}
-
-// ---------------------------------------------------------------------------
-// Search with memory
-// ---------------------------------------------------------------------------
-
-/// How many numbers between `lo` and `hi`, both included, could still be the
-/// secret?
-pub fn possible_count(keeper: &SecretKeeper, lo: u32, hi: u32) -> u32 {
     let mut low = min;
     let mut high = max - 1;
 
@@ -155,11 +148,37 @@ pub fn possible_count(keeper: &SecretKeeper, lo: u32, hi: u32) -> u32 {
         if keeper.ask_if_greater(middle) {
             low = middle + 1;
         } else {
-            high = middle - 1;
+            high = middle;
         }
     }
 
     low
+}
+
+// ---------------------------------------------------------------------------
+// Search with memory
+// ---------------------------------------------------------------------------
+
+/// How many numbers between `lo` and `hi`, both included, could still be the
+/// secret?
+pub fn possible_count(keeper: &SecretKeeper, lo: u32, hi: u32) -> u32 {
+    let mut count = 0;
+    let mut number = lo;
+
+    while number <= hi {
+        if keeper.is_still_possible(number) {
+            count += 1;
+        }
+
+        if number == u32::MAX {
+            break;
+        }
+
+        number += 1;
+    }
+
+    count
+
 }
 
 /// The first number in `lo..=hi` that could still be the secret. `None` when
@@ -168,8 +187,8 @@ pub fn first_possible(keeper: &SecretKeeper, lo: u32, hi: u32) -> Option<u32> {
    let mut number = lo;
 
     while number <= hi {
-        if keeper.ask_if_possible(number) {
-            return Some(number);
+        if keeper.is_still_possible(number) {
+            return Some(number)
         }
 
         if number == u32::MAX {
